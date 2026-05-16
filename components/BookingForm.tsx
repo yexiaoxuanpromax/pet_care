@@ -6,6 +6,7 @@ type FormValues = {
   name: string;
   phone: string;
   service: string;
+  arrivalTime: string;
   message: string;
 };
 
@@ -16,6 +17,7 @@ const initialValues: FormValues = {
   name: "",
   phone: "",
   service: "",
+  arrivalTime: "",
   message: "",
 };
 
@@ -37,6 +39,10 @@ function validate(values: FormValues) {
 
   if (!values.service) {
     errors.service = "请选择服务项目。";
+  }
+
+  if (!values.arrivalTime) {
+    errors.arrivalTime = "请选择期望到店时间。";
   }
 
   return errors;
@@ -157,12 +163,30 @@ export function BookingForm() {
         </label>
 
         <label className="grid gap-1.5">
+          <span className="sr-only">期望到店时间</span>
+          <input
+            className="min-h-[50px] w-full rounded-lg border border-ink/15 bg-white px-3.5 py-3 text-ink outline-none transition placeholder:text-muted/75 focus:border-sage focus:ring-4 focus:ring-sage/20"
+            type="datetime-local"
+            name="arrivalTime"
+            value={values.arrivalTime}
+            aria-label="期望到店时间"
+            aria-invalid={Boolean(errors.arrivalTime)}
+            onChange={(event) => updateValue("arrivalTime", event.target.value)}
+          />
+          {errors.arrivalTime && (
+            <span className="text-sm font-semibold text-coral">
+              {errors.arrivalTime}
+            </span>
+          )}
+        </label>
+
+        <label className="grid gap-1.5">
           <span className="sr-only">预约备注</span>
           <textarea
             className="min-h-[92px] w-full resize-y rounded-lg border border-ink/15 bg-white px-3.5 py-3 text-ink outline-none transition placeholder:text-muted/75 focus:border-sage focus:ring-4 focus:ring-sage/20 max-[620px]:min-h-[78px]"
             name="message"
             value={values.message}
-            placeholder="宠物品种、体重、毛发情况或希望预约的时间"
+            placeholder="宠物品种、体重、毛发情况或其他备注"
             onChange={(event) => updateValue("message", event.target.value)}
           />
         </label>
