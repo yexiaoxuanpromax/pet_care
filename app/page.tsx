@@ -354,18 +354,18 @@ export default function Home() {
               title="到店更方便，位置一眼看清。"
               body="门店位于中田南小区附近，靠近新城小学与凤仪东路，预约后按确认时间到店即可。"
             />
-            <div className="grid grid-cols-[minmax(0,1.25fr)_minmax(300px,0.75fr)] items-start gap-7 max-[960px]:grid-cols-1">
+            <div className="grid gap-7">
               <figure
                 className="m-0 overflow-hidden rounded-lg border border-sage-dark/15 bg-[#f6fbf8] shadow-soft"
                 aria-label="门店位置示意地图"
               >
-                <div className="aspect-[16/10] w-full">
+                <div className="aspect-[1586/992] w-full bg-[#f6fbf8]">
                   {/* Direct public asset rendering avoids local Next image optimizer issues. */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/assets/store-map-ai.png"
                     alt="宝可梦 POKEMON 宠物生活馆中田南小区店，上海市宜川路街道陕西北路1620号位置示意地图"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain"
                   />
                 </div>
                 <figcaption className="flex items-center justify-between gap-3 border-t border-sage-dark/10 bg-white/85 px-4 py-3.5 text-sm text-muted max-[620px]:flex-col max-[620px]:items-start">
