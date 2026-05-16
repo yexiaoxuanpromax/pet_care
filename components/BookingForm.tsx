@@ -13,6 +13,22 @@ type FormValues = {
 type FormErrors = Partial<Record<keyof FormValues, string>>;
 type Notice = { type: "success" | "error"; message: string } | null;
 
+const formatDateTimeLocal = (date: Date) => {
+  const pad = (value: number) => value.toString().padStart(2, "0");
+
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
+    date.getDate(),
+  )}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+};
+
+const getDefaultArrivalTime = () => {
+  const tomorrowMorning = new Date();
+  tomorrowMorning.setDate(tomorrowMorning.getDate() + 1);
+  tomorrowMorning.setHours(9, 30, 0, 0);
+
+  return formatDateTimeLocal(tomorrowMorning);
+};
+
 const initialValues: FormValues = {
   name: "",
   phone: "",
@@ -20,6 +36,11 @@ const initialValues: FormValues = {
   arrivalTime: "",
   message: "",
 };
+
+const createInitialValues = (): FormValues => ({
+  ...initialValues,
+  arrivalTime: getDefaultArrivalTime(),
+});
 
 const phonePattern =
   /^(?:(?:\+?86[-\s]?)?1[3-9]\d{9}|0\d{2,3}[-\s]?\d{7,8})$/;
@@ -49,7 +70,7 @@ function validate(values: FormValues) {
 }
 
 export function BookingForm() {
-  const [values, setValues] = useState<FormValues>(initialValues);
+  const [values, setValues] = useState<FormValues>(createInitialValues);
   const [errors, setErrors] = useState<FormErrors>({});
   const [notice, setNotice] = useState<Notice>(null);
 
@@ -94,7 +115,7 @@ export function BookingForm() {
       type: "success",
       message: "预约信息已记录，我们会尽快与你确认时间。",
     });
-    setValues(initialValues);
+    setValues(createInitialValues());
   };
 
   return (
@@ -171,6 +192,7 @@ export function BookingForm() {
             value={values.arrivalTime}
             aria-label="期望到店时间"
             aria-invalid={Boolean(errors.arrivalTime)}
+            suppressHydrationWarning
             onChange={(event) => updateValue("arrivalTime", event.target.value)}
           />
           {errors.arrivalTime && (
