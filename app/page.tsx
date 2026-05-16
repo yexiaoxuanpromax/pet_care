@@ -1,5 +1,6 @@
 import { BookingForm } from "@/components/BookingForm";
 import { EnvironmentCarousel } from "@/components/EnvironmentCarousel";
+import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 
 const navItems = [
   ["服务", "#services"],
@@ -324,24 +325,7 @@ export default function Home() {
               title="被反复选择，靠的是细节。"
               body="我们更在意宠物离店后的状态：毛发是否蓬松、情绪是否稳定、主人是否知道下一步怎么护理。"
             />
-            <div className="grid grid-cols-[1.1fr_0.9fr] gap-[18px] max-[960px]:grid-cols-1">
-              <article className="rounded-lg border border-ink/15 bg-[#f4faf7] p-7">
-                <p className="text-[clamp(23px,3vw,36px)] font-extrabold leading-[1.22] text-muted">
-                  “我家狗以前一进洗护店就发抖，这次美容师一直给它暂停休息，回家后状态很松弛。”
-                </p>
-                <div className="mt-6 font-extrabold text-sage-dark">
-                  柴犬栗子家长
-                </div>
-              </article>
-              <article className="rounded-lg border border-ink/15 bg-white p-7">
-                <p className="text-muted">
-                  长毛猫打结处理得很仔细，没有硬拉。美容师还标出了容易复发的位置，回家梳毛终于有方向了。
-                </p>
-                <div className="mt-6 font-extrabold text-sage-dark">
-                  布偶奶糖家长
-                </div>
-              </article>
-            </div>
+            <TestimonialsCarousel />
           </div>
         </section>
 
